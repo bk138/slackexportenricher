@@ -1,5 +1,12 @@
 #!/bin/sh
 
+if [ -z "$1" ] || [ -z "$2" ]
+then
+    echo "usage $0 <in.zip> <out.zip>"
+    exit 1
+fi
+
+
 # unpack
 rm -rf in
 mkdir -p in
@@ -60,3 +67,7 @@ do
 
 	echo "]" >> ../out/$J
 done
+
+cd out
+zip -r ../"$2" *
+cd ..
