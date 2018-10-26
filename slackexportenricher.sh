@@ -1,7 +1,13 @@
 #!/bin/sh
 
+if [ -z "$1" ]
+then
+    echo gimme archive
+    exit 1
+fi
+
 # unpack
-#unzip "$1"
+unzip "$1"
 
 rm -rf /tmp/see-out
 mkdir /tmp/see-out
