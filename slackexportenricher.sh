@@ -30,7 +30,7 @@ do
 		if echo $(/bin/echo $MSG | jshon -k) | grep -q files
 		then
 		    echo "   has files"
-		    FILE_URLS="$(/bin/echo $MSG | jshon -e files -a -e url_private)"
+		    FILE_URLS="$(/bin/echo $MSG | jshon -e files -a -e url_private -u)"
 		    MSG=$(/bin/echo $MSG | jshon -s $FILE_URLS -i text)
 		fi
 	    fi
