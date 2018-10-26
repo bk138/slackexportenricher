@@ -14,6 +14,12 @@ do
     mkdir  out/$(basename $D)
 done
 
+# copy root data
+for F in $(find in -maxdepth 1 -type f)
+do
+    cp $F out/
+done
+
 cd in
 # get channel json files
 for J in $(find . -mindepth 2 -name \*.json)
