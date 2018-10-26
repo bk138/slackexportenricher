@@ -70,6 +70,6 @@ do
 	echo "]" >> ../out/$J
 done
 
-cd out
+cd ../out
 zip -r ../"$2" *
 cd ..
