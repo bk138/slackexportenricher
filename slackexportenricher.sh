@@ -22,16 +22,16 @@ do
 
 	    MSG="$(jshon -e $I < $J)"
 
-	    TEXT=$(echo $MSG | jshon -e text)
+	    TEXT=$(/bin/echo $MSG | jshon -e text)
 
 	    if [ "$TEXT" = '""' ]
 	    then
 		echo "  empty"
-		if echo $(echo $MSG | jshon -k) | grep -q files
+		if echo $(/bin/echo $MSG | jshon -k) | grep -q files
 		then
 		    echo "   has files"
-		    FILE_URLS="$(echo $MSG | jshon -e files -a -e url_private)"
-		    MSG=$(echo $MSG | jshon -s $FILE_URLS -i text)
+		    FILE_URLS="$(/bin/echo $MSG | jshon -e files -a -e url_private)"
+		    MSG=$(/bin/echo $MSG | jshon -s $FILE_URLS -i text)
 		fi
 	    fi
 
