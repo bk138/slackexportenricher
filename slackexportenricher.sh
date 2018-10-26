@@ -26,7 +26,6 @@ do
 
 	    if [ "$TEXT" = '""' ]
 	    then
-		echo "  empty"
 		if echo $(/bin/echo $MSG | jshon -k) | grep -q files
 		then
 		    echo "   has files"
