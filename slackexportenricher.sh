@@ -1,19 +1,21 @@
 #!/bin/sh
 
 # unpack
-#unzip "$1"
+mkdir -p in
+unzip "$1" -d in
 
-rm -rf /tmp/see-out
-mkdir /tmp/see-out
+rm -rf out
+mkdir out
 
+cd in
 # get channel json files
 for J in $(find . -mindepth 2 -name \*.json)
 do
 	echo "processing $J"
 
-	mkdir -p /tmp/see-out/$(dirname $J)
+	mkdir -p ../out/$(dirname $J)
 
-	echo "[" >> /tmp/see-out/$J
+	echo "[" >> ../out/$J
 
 	COUNT=$(jshon -l < $J)
 	I=0
@@ -34,16 +36,16 @@ do
 		fi
 	    fi
 
-	    /bin/echo $MSG >> /tmp/see-out/$J
+	    /bin/echo $MSG >> ../out/$J
 
 	    if [ $I -lt $(($COUNT - 1)) ]
 	    then
-	    	echo "," >> /tmp/see-out/$J
+	    	echo "," >> ../out/$J
 	    fi
 
 	    # go on
 	    I=$(($I + 1))
 	done 
 
-	echo "]" >> /tmp/see-out/$J
+	echo "]" >> ../out/$J
 done
