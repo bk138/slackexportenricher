@@ -1,19 +1,24 @@
 #!/bin/sh
 
 # unpack
+rm -rf in
 mkdir -p in
 unzip "$1" -d in
 
 rm -rf out
 mkdir out
 
+# make dirs
+for D in $(find in -mindepth 1 -type d)
+do
+    mkdir  out/$(basename $D)
+done
+
 cd in
 # get channel json files
 for J in $(find . -mindepth 2 -name \*.json)
 do
 	echo "processing $J"
-
-	mkdir -p ../out/$(dirname $J)
 
 	echo "[" >> ../out/$J
 
