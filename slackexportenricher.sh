@@ -35,7 +35,7 @@ do
 		fi
 	    fi
 
-	    echo $MSG >> out/$J
+	    /bin/echo $MSG >> out/$J
 
 	    if [ $I -lt $(($COUNT - 1)) ]
 	    then
