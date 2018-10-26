@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 if [ -z "$1" ] || [ -z "$2" ]
 then
     echo "usage $0 <in.zip> <out.zip>"
