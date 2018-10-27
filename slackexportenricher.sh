@@ -56,9 +56,10 @@ do
 		fi
 	    fi
 
-	    if /bin/echo "$TEXT" | grep -q http
+	    # if text contains 'http', but not '<!' channel mention nor '<@' user mention nor '|' fancyfied url
+	    if /bin/echo "$TEXT" | grep -q 'http' && /bin/echo "$TEXT" | grep -q -v '<!' && /bin/echo "$TEXT" | grep -q -v '<@' && /bin/echo "$TEXT" | grep -q -v '|'
 	    then
-		echo "   has urls"
+		echo "   has urls and no mentions"
 		/bin/echo $MSG | jshon -e text -u
 		MTEXT=$(/bin/echo $MSG | jshon -e text -u | sed s/'<'//g | sed s/'>'//g)
 		/bin/echo $MTEXT
