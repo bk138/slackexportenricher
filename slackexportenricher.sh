@@ -60,9 +60,7 @@ do
 	    if /bin/echo "$TEXT" | grep -q 'http' && /bin/echo "$TEXT" | grep -q -v '<!' && /bin/echo "$TEXT" | grep -q -v '<@' && /bin/echo "$TEXT" | grep -q -v '|'
 	    then
 		echo "   has urls and no mentions"
-		/bin/echo $MSG | jshon -e text -u
 		MTEXT=$(/bin/echo $MSG | jshon -e text -u | sed s/'<'//g | sed s/'>'//g)
-		/bin/echo $MTEXT
 		MSG=$(/bin/echo $MSG | jshon -s "$MTEXT" -i text)
 	    fi
 
