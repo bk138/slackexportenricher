@@ -47,14 +47,11 @@ do
 	    TEXT=$(/bin/echo $MSG | jshon -e text)
 
 	    # ENRICH 1: add file urls to text
-	    if [ "$TEXT" = '""' ]
+	    if echo $(/bin/echo $MSG | jshon -k) | grep -q files
 	    then
-		if echo $(/bin/echo $MSG | jshon -k) | grep -q files
-		then
-		    echo "   has files"
-		    FILE_URLS="$(/bin/echo $MSG | jshon -e files -a -e url_private -u)"
-		    MSG=$(/bin/echo $MSG | jshon -s $FILE_URLS -i text)
-		fi
+	        echo "   has files"
+	        FILE_URLS="$(/bin/echo $MSG | jshon -e files -a -e url_private -u)"
+	        MSG=$(/bin/echo $MSG | jshon -s "$TEXT $FILE_URLS" -i text)
 	    fi
 
 	    # ENRICH 2: if text contains 'http', but not '<!' channel mention nor '<@' user mention nor '|' fancyfied url
