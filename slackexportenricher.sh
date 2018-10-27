@@ -46,6 +46,7 @@ do
 
 	    TEXT=$(/bin/echo $MSG | jshon -e text)
 
+	    # ENRICH 1: add file urls to text
 	    if [ "$TEXT" = '""' ]
 	    then
 		if echo $(/bin/echo $MSG | jshon -k) | grep -q files
@@ -56,7 +57,7 @@ do
 		fi
 	    fi
 
-	    # if text contains 'http', but not '<!' channel mention nor '<@' user mention nor '|' fancyfied url
+	    # ENRICH 2: if text contains 'http', but not '<!' channel mention nor '<@' user mention nor '|' fancyfied url
 	    if /bin/echo "$TEXT" | grep -q 'http' && /bin/echo "$TEXT" | grep -q -v '<!' && /bin/echo "$TEXT" | grep -q -v '<@' && /bin/echo "$TEXT" | grep -q -v '|'
 	    then
 		echo "   has urls and no mentions"
