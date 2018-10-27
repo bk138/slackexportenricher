@@ -1,5 +1,8 @@
 # slack export enricher
 
+Quick and dirty script to spice up Slack exports for Mattermost to digest
+more nicely.
+
 This does two things for Slack->Mattermost export/import:
 
 * Where files were sent in Slack with an empty text message, it pastes
