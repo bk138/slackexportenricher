@@ -56,6 +56,15 @@ do
 		fi
 	    fi
 
+	    if /bin/echo "$TEXT" | grep -q http
+	    then
+		echo "   has urls"
+		/bin/echo $MSG | jshon -e text -u
+		MTEXT=$(/bin/echo $MSG | jshon -e text -u | sed s/'<'//g | sed s/'>'//g)
+		/bin/echo $MTEXT
+		MSG=$(/bin/echo $MSG | jshon -s "$MTEXT" -i text)
+	    fi
+
 	    /bin/echo $MSG >> ../out/$J
 
 	    if [ $I -lt $(($COUNT - 1)) ]
